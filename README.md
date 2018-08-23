@@ -1,4 +1,4 @@
-This is the repo for RotoGrinders Pair Programming Exercise for the technical interview.
+This is the repo for RotoGrinders Pair Programming Exercise
 
 Make sure the you are able to load and start this app before the interview. If you have any problems or questions please reach out to nick.sarlo@rotogrinders.com
 
