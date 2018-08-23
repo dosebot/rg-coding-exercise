@@ -32,7 +32,8 @@ class PlayerTableContainer extends Component {
       property: 'height',
       sortOrder: 'asc',
       customSort: false,
-      checkbox: '',
+      checkbox: [],
+      foo: [],
     }
     this.toggleSortOrder = this.toggleSortOrder.bind(this)
     this.toggleCheckbox = this.toggleCheckbox.bind(this)
@@ -72,23 +73,32 @@ class PlayerTableContainer extends Component {
 
   toggleCheckbox(element) {
     const { checkbox } = this.state
-    const checkElement = checkbox === element ? '' : element
-    this.setState({ checkbox: checkElement })
+
+    if (!checkbox.includes(element)) {
+      const newCheckbox = checkbox.slice() || []
+      newCheckbox.push(element)
+      this.setState({ checkbox: newCheckbox })
+    } else {
+      const newCheckbox = checkbox.slice() || []
+      const indexOfElement = newCheckbox.indexOf(element)
+      newCheckbox.splice(indexOfElement, 1)
+      this.setState({ checkbox: newCheckbox })
+    }
   }
 
   render() {
     const { players, customSort, property, sortOrder, checkbox } = this.state
-    const sortedPlayerFeed = checkbox
-      ? players.filter(element => {
-          const { position } = element
-          const checkboxFilter = this.state.checkbox
-
-          if (position.toLowerCase() === checkboxFilter.toLowerCase()) {
-            return true
-          }
-          return false
-        })
-      : players
+    const sortedPlayerFeed =
+      checkbox.length > 0
+        ? players.filter(element => {
+            const { position } = element
+            const checkboxFilter = this.state.checkbox
+            if (checkboxFilter.includes(position.toLowerCase())) {
+              return true
+            }
+            return false
+          })
+        : players
     const playerFeed = customSort
       ? sortPlayers(sortedPlayerFeed, property, sortOrder)
       : sortedPlayerFeed
