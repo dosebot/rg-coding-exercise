@@ -1,18 +1,13 @@
-import {
-  sortPlayersByDescHeight,
-  sortPlayersByAscHeight,
-  sortPlayersByAscWeight,
-  sortPlayersByDescWeight,
-} from './PlayerTableContainer'
+import { sortPlayersByDesc, sortPlayersByAsc } from './PlayerTableContainer'
 
-it('sorts players by height by descending order', () => {
+it('sorts players by weight in descending order', () => {
   const players = [
-    { height: '65', id: 1 },
-    { height: '75', id: 4 },
-    { height: '55', id: 3 },
-    { height: '60', id: 2 },
+    { weight: '65', height: '5', id: 1 },
+    { weight: '75', height: '3', id: 4 },
+    { weight: '55', height: '8', id: 3 },
+    { weight: '60', height: '1', id: 2 },
   ]
-  const result = sortPlayersByDescHeight(players)
+  const result = sortPlayersByDesc(players, 'weight')
   const expectedFirst = 4
   const actualFirst = result[0].id
   const expectedLast = 3
@@ -22,51 +17,51 @@ it('sorts players by height by descending order', () => {
   expect(expectedLast).toEqual(actualLast)
 })
 
-it('sorts players by height by ascending order', () => {
+it('sorts players by height in descending order', () => {
   const players = [
-    { height: '65', id: 1 },
-    { height: '75', id: 4 },
-    { height: '55', id: 3 },
-    { height: '60', id: 2 },
+    { weight: '65', height: '5', id: 1 },
+    { weight: '75', height: '3', id: 4 },
+    { weight: '55', height: '8', id: 3 },
+    { weight: '60', height: '1', id: 2 },
   ]
-  const result = sortPlayersByAscHeight(players)
+  const result = sortPlayersByDesc(players, 'height')
   const expectedFirst = 3
   const actualFirst = result[0].id
-  const expectedLast = 4
+  const expectedLast = 2
   const actualLast = result[result.length - 1].id
 
   expect(expectedFirst).toEqual(actualFirst)
   expect(expectedLast).toEqual(actualLast)
 })
 
-it('sorts players by weight by ascending order', () => {
+it('sorts players by height in ascending order', () => {
   const players = [
-    { weight: '65', id: 1 },
-    { weight: '75', id: 4 },
-    { weight: '55', id: 3 },
-    { weight: '60', id: 2 },
+    { weight: '65', height: '5', id: 1 },
+    { weight: '75', height: '3', id: 4 },
+    { weight: '55', height: '8', id: 3 },
+    { weight: '60', height: '1', id: 2 },
   ]
-  const result = sortPlayersByAscWeight(players)
-  const expectedFirst = 3
-  const actualFirst = result[0].id
-  const expectedLast = 4
-  const actualLast = result[result.length - 1].id
-
-  expect(expectedFirst).toEqual(actualFirst)
-  expect(expectedLast).toEqual(actualLast)
-})
-
-it('sorts players by weight by descending order', () => {
-  const players = [
-    { weight: '65', id: 1 },
-    { weight: '75', id: 4 },
-    { weight: '55', id: 3 },
-    { weight: '60', id: 2 },
-  ]
-  const result = sortPlayersByDescWeight(players)
-  const expectedFirst = 4
+  const result = sortPlayersByAsc(players, 'height')
+  const expectedFirst = 2
   const actualFirst = result[0].id
   const expectedLast = 3
+  const actualLast = result[result.length - 1].id
+
+  expect(expectedFirst).toEqual(actualFirst)
+  expect(expectedLast).toEqual(actualLast)
+})
+
+it('sorts players by weight in ascending order', () => {
+  const players = [
+    { weight: '65', height: '5', id: 1 },
+    { weight: '75', height: '3', id: 4 },
+    { weight: '55', height: '8', id: 3 },
+    { weight: '60', height: '1', id: 2 },
+  ]
+  const result = sortPlayersByAsc(players, 'weight')
+  const expectedFirst = 3
+  const actualFirst = result[0].id
+  const expectedLast = 4
   const actualLast = result[result.length - 1].id
 
   expect(expectedFirst).toEqual(actualFirst)

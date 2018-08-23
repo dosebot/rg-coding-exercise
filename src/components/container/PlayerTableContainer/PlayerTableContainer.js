@@ -5,37 +5,19 @@ import { fetchPlayers } from './apiCalls'
 import PlayerTable from '../../presentational/PlayerTable'
 import PlayerTableFilters from '../../presentational/PlayerTableFilters'
 
-export function sortPlayersByDescHeight(players) {
+export function sortPlayersByDesc(players = [], property = 'height') {
   const sortedPlayers = players.sort((a, b) => {
-    if (a.height > b.height) return -1
-    if (a.height < b.height) return 1
+    if (a[property] > b[property]) return -1
+    if (a[property] < b[property]) return 1
     return 0
   })
   return sortedPlayers
 }
 
-export function sortPlayersByAscHeight(players) {
+export function sortPlayersByAsc(players = [], property = 'height') {
   const sortedPlayers = players.sort((a, b) => {
-    if (a.height < b.height) return -1
-    if (a.height > b.height) return 1
-    return 0
-  })
-  return sortedPlayers
-}
-
-export function sortPlayersByAscWeight(players) {
-  const sortedPlayers = players.sort((a, b) => {
-    if (a.weight < b.weight) return -1
-    if (a.weight > b.weight) return 1
-    return 0
-  })
-  return sortedPlayers
-}
-
-export function sortPlayersByDescWeight(players) {
-  const sortedPlayers = players.sort((a, b) => {
-    if (a.weight > b.weight) return -1
-    if (a.weight < b.weight) return 1
+    if (a[property] < b[property]) return -1
+    if (a[property] > b[property]) return 1
     return 0
   })
   return sortedPlayers
