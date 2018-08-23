@@ -1,20 +1,48 @@
-import React from 'react';
-import { FormGroup, Checkbox, FormControl } from 'react-bootstrap';
+import React from 'react'
+import { FormGroup, Checkbox, FormControl } from 'react-bootstrap'
 
-import './PlayerTableFilters.css';
+import './PlayerTableFilters.css'
 
-const PlayerTableFilters = () => {
+const PlayerTableFilters = ({ toggleCheckbox }) => {
   return (
     <div className="PlayerTableFilters">
       <FormGroup>
-        <Checkbox inline>QB</Checkbox>
-        <Checkbox inline>RB</Checkbox>
-        <Checkbox inline>WR</Checkbox>
-        <Checkbox inline>TE</Checkbox>
+        <Checkbox
+          inline
+          onChange={() => {
+            toggleCheckbox('qb')
+          }}
+        >
+          QB
+        </Checkbox>
+        <Checkbox
+          inline
+          onChange={() => {
+            toggleCheckbox('rb')
+          }}
+        >
+          RB
+        </Checkbox>
+        <Checkbox
+          inline
+          onChange={() => {
+            toggleCheckbox('wr')
+          }}
+        >
+          WR
+        </Checkbox>
+        <Checkbox
+          inline
+          onChange={() => {
+            toggleCheckbox('te')
+          }}
+        >
+          TE
+        </Checkbox>
       </FormGroup>
       <FormControl type="text" placeholder="Search by Name" />
     </div>
   )
 }
 
-export default PlayerTableFilters;
+export default PlayerTableFilters

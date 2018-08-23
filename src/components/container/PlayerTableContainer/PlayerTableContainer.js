@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { fetchPlayers } from './apiCalls'
+import { fetchPlayers, fetchADP } from './apiCalls'
 
 import PlayerTable from '../../presentational/PlayerTable'
 import PlayerTableFilters from '../../presentational/PlayerTableFilters'
@@ -40,6 +40,22 @@ class PlayerTableContainer extends Component {
 
   componentDidMount = async () => {
     const players = await fetchPlayers()
+    const adp = await fetchADP()
+    players.slice(0).forEach(element => {
+      const name = `${
+        element.name.split(', ')[element.name.split(', ').length - 1]
+      } ${element.name.split(', ')[0]}`
+      element.name = name
+    })
+
+    for (let i = 0; i < players.length; i++) {
+      for (let j = 0; j < adp.length; j++) {
+        if (adp[j].id === players[i].id) {
+          players[i].adp = Number(adp[j].averagePick)
+        }
+      }
+      players[i].adp ? '' : (players[i].adp = 400)
+    }
     this.setState({ players })
   }
 
@@ -61,10 +77,22 @@ class PlayerTableContainer extends Component {
   }
 
   render() {
-    const { players, customSort, property, sortOrder } = this.state
-    const playerFeed = customSort
-      ? sortPlayers(players, property, sortOrder)
+    const { players, customSort, property, sortOrder, checkbox } = this.state
+    const sortedPlayerFeed = checkbox
+      ? players.filter(element => {
+          const { position } = element
+          const checkboxFilter = this.state.checkbox
+
+          if (position.toLowerCase() === checkboxFilter.toLowerCase()) {
+            return true
+          }
+          return false
+        })
       : players
+    const playerFeed = customSort
+      ? sortPlayers(sortedPlayerFeed, property, sortOrder)
+      : sortedPlayerFeed
+
     return (
       <div>
         <PlayerTableFilters toggleCheckbox={this.toggleCheckbox} />

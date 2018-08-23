@@ -42,6 +42,7 @@ const PlayerTable = ({ players, toggleSortOrder }) => {
               <FontAwesomeIcon icon="sort" />
             </button>
           </th>
+          <th>ADP</th>
         </tr>
       </thead>
       <tbody>

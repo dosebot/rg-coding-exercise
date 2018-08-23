@@ -1,5 +1,5 @@
-import React from 'react';
-import Proptypes from 'prop-types';
+import React from 'react'
+import Proptypes from 'prop-types'
 
 const PlayerRow = ({ player }) => {
   return (
@@ -9,6 +9,7 @@ const PlayerRow = ({ player }) => {
       <td>{player.team}</td>
       <td>{player.height}</td>
       <td>{player.weight}</td>
+      <td>{player.adp}</td>
     </tr>
   )
 }
@@ -16,4 +17,4 @@ const PlayerRow = ({ player }) => {
 PlayerRow.propTypes = {
   player: Proptypes.object,
 }
-export default PlayerRow;
+export default PlayerRow
