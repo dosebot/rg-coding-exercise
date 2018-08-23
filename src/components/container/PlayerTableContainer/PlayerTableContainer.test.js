@@ -68,6 +68,40 @@ it('sorts players by weight in ascending order', () => {
   expect(expectedLast).toEqual(actualLast)
 })
 
+it('sorts players by name in ascending order', () => {
+  const players = [
+    { name: 'Dan', height: '5', id: 1 },
+    { name: 'Bill', height: '3', id: 4 },
+    { name: 'Mike', height: '8', id: 3 },
+    { name: 'Bastos', height: '1', id: 2 },
+  ]
+  const result = sortPlayers(players, 'name', 'asc')
+  const expectedFirst = 2
+  const actualFirst = result[0].id
+  const expectedLast = 3
+  const actualLast = result[result.length - 1].id
+
+  expect(expectedFirst).toEqual(actualFirst)
+  expect(expectedLast).toEqual(actualLast)
+})
+
+it('sorts players by name in descending order', () => {
+  const players = [
+    { name: 'Dan', height: '5', id: 1 },
+    { name: 'Bill', height: '3', id: 4 },
+    { name: 'Mike', height: '8', id: 3 },
+    { name: 'Bastos', height: '1', id: 2 },
+  ]
+  const result = sortPlayers(players, 'name', 'dsc')
+  const expectedFirst = 3
+  const actualFirst = result[0].id
+  const expectedLast = 2
+  const actualLast = result[result.length - 1].id
+
+  expect(expectedFirst).toEqual(actualFirst)
+  expect(expectedLast).toEqual(actualLast)
+})
+
 it('Players array does not get mutated', () => {
   const players = [
     { weight: '65', height: '5', id: 1 },

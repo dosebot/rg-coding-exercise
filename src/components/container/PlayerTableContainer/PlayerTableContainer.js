@@ -24,24 +24,54 @@ export function sortPlayers(players = [], property = 'height', sortOrder) {
 }
 
 class PlayerTableContainer extends Component {
-  state = {
-    players: [],
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      players: [],
+      property: 'height',
+      sortOrder: 'asc',
+      customSort: false,
+      checkbox: '',
+    }
+    this.toggleSortOrder = this.toggleSortOrder.bind(this)
+    this.toggleCheckbox = this.toggleCheckbox.bind(this)
   }
+
   componentDidMount = async () => {
     const players = await fetchPlayers()
     this.setState({ players })
   }
 
-  foo(element) {
-    console.log(element)
+  toggleSortOrder(element) {
+    const { sortOrder, customSort } = this.state
+    const newSortOrder = sortOrder === 'asc' ? 'dsc' : 'asc'
+    if (customSort === false) {
+      this.setState({ customSort: true })
+    }
+    if (customSort) {
+      this.setState({ sortOrder: newSortOrder, property: element })
+    }
+  }
+
+  toggleCheckbox(element) {
+    const { checkbox } = this.state
+    const checkElement = checkbox === element ? '' : element
+    this.setState({ checkbox: checkElement })
   }
 
   render() {
-    const { players } = this.state
+    const { players, customSort, property, sortOrder } = this.state
+    const playerFeed = customSort
+      ? sortPlayers(players, property, sortOrder)
+      : players
     return (
       <div>
-        <PlayerTableFilters />
-        <PlayerTable players={players} foo={this.foo} />
+        <PlayerTableFilters toggleCheckbox={this.toggleCheckbox} />
+        <PlayerTable
+          players={playerFeed}
+          toggleSortOrder={this.toggleSortOrder}
+        />
       </div>
     )
   }
