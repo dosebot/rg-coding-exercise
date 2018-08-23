@@ -33,7 +33,6 @@ class PlayerTableContainer extends Component {
       sortOrder: 'asc',
       customSort: false,
       checkbox: [],
-      foo: [],
     }
     this.toggleSortOrder = this.toggleSortOrder.bind(this)
     this.toggleCheckbox = this.toggleCheckbox.bind(this)
