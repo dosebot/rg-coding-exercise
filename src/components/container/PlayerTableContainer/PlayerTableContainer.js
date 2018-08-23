@@ -5,21 +5,21 @@ import { fetchPlayers } from './apiCalls'
 import PlayerTable from '../../presentational/PlayerTable'
 import PlayerTableFilters from '../../presentational/PlayerTableFilters'
 
-export function sortPlayersByDesc(players = [], property = 'height') {
-  const sortedPlayers = players.sort((a, b) => {
-    if (a[property] > b[property]) return -1
-    if (a[property] < b[property]) return 1
-    return 0
-  })
-  return sortedPlayers
-}
-
-export function sortPlayersByAsc(players = [], property = 'height') {
-  const sortedPlayers = players.sort((a, b) => {
+export function sortPlayers(players = [], property = 'height', sortOrder) {
+  const ascCompare = (a, b) => {
     if (a[property] < b[property]) return -1
     if (a[property] > b[property]) return 1
     return 0
-  })
+  }
+  const descCompare = (a, b) => {
+    if (a[property] > b[property]) return -1
+    if (a[property] < b[property]) return 1
+    return 0
+  }
+
+  const compare = sortOrder === 'asc' ? ascCompare : descCompare
+
+  const sortedPlayers = players.sort(compare)
   return sortedPlayers
 }
 
