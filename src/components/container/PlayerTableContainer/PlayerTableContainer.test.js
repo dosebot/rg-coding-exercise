@@ -67,3 +67,15 @@ it('sorts players by weight in ascending order', () => {
   expect(expectedFirst).toEqual(actualFirst)
   expect(expectedLast).toEqual(actualLast)
 })
+
+it('Players array does not get mutated', () => {
+  const players = [
+    { weight: '65', height: '5', id: 1 },
+    { weight: '75', height: '3', id: 4 },
+    { weight: '55', height: '8', id: 3 },
+    { weight: '60', height: '1', id: 2 },
+  ]
+  const expectedFirst = 1
+  sortPlayers(players)
+  expect(expectedFirst).toEqual(players[0].id)
+})

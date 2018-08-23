@@ -19,7 +19,7 @@ export function sortPlayers(players = [], property = 'height', sortOrder) {
 
   const compare = sortOrder === 'asc' ? ascCompare : descCompare
 
-  const sortedPlayers = players.sort(compare)
+  const sortedPlayers = players.slice().sort(compare)
   return sortedPlayers
 }
 
